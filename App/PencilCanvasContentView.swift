@@ -1,7 +1,7 @@
 import PencilKit
 import SwiftUI
 
-struct CanvasContentView: View {
+struct PencilCanvasContentView: View {
   @State private var canvasView = PKCanvasView()
   @State private var toolPicker = PKToolPicker()
 
@@ -22,5 +22,5 @@ struct CanvasContentView: View {
 }
 
 #Preview {
-  CanvasContentView()
+  PencilCanvasContentView()
 }

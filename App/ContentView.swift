@@ -6,14 +6,37 @@
 //
 
 import SwiftUI
+import PencilKit
 
 struct ContentView: View {
+    
     var body: some View {
-        VStack {
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundStyle(.tint)
-            Text("Hello, world!")
+
+        VStack() {
+            PencilCanvasContentView()
+        }
+        .toolbar {
+            ToolbarItem {
+                HStack {
+                    Button(action: {
+                        print("Undo")
+                    }) {
+                        Image(systemName: "arrow.uturn.backward")
+                    }
+                    Button(action: {
+                        print("Redo")
+                    }) {
+                        Image(systemName: "arrow.uturn.forward")
+                    }
+                    Spacer()
+                    Button(action: {
+                        print("Clear")
+                    }) {
+                        Image(systemName: "trash")
+                    }
+                }
+                .padding()
+            }
         }
         .padding()
     }

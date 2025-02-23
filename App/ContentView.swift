@@ -12,11 +12,11 @@ struct ContentView: View {
     
     var body: some View {
 
-        VStack() {
+        HStack() {
             PencilCanvasContentView()
         }
         .toolbar {
-            ToolbarItem {
+            ToolbarItem(placement: .bottomBar) {
                 HStack {
                     Button(action: {
                         print("Undo")

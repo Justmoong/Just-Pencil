@@ -1,5 +1,0 @@
----
-triple:          'arm64-apple-darwin'
-binary-path:     '/Users/ymy/Developer/Just Pencil/build/Release-iphoneos/Just Pencil.app/Just Pencil'
-relocations:     []
-...

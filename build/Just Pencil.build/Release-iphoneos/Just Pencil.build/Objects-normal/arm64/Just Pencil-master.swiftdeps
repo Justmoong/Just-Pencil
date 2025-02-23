@@ -1,9 +1,0 @@
-version: "Apple Swift version 6.0.3 (swiftlang-6.0.3.1.10 clang-1600.0.30.1)"
-options: "0ab1ab5ade41717e458bbd54024ded5a0bd55e7dac48c3cc343f370e7da31edd"
-build_start_time: [1740324297, 573982000]
-build_end_time: [1740324301, 447589000]
-inputs:
-  "/Users/ymy/Developer/Just Pencil/Just Pencil/ContentView.swift": [1740324082, 269590539]
-  "/Users/ymy/Developer/Just Pencil/Just Pencil/Just_PencilApp.swift": [1740324082, 266590089]
-  ? "/Users/ymy/Developer/Just Pencil/build/Just Pencil.build/Release-iphoneos/Just Pencil.build/DerivedSources/GeneratedAssetSymbols.swift"
-  : [1740324297, 499573618]

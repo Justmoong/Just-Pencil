@@ -1,0 +1,2 @@
+Target dependency graph (1 target)
+Target 'Just Pencil' in project 'Just Pencil' (no dependencies)

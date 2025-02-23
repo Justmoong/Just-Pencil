@@ -1,0 +1,16 @@
+{
+  "source": "/Users/ymy/Developer/Just Pencil/Just Pencil/ContentView.swift",
+  "tables": {
+    "Localizable": [
+      {
+        "comment": "",
+        "key": "Hello, world!",
+        "location": {
+          "startingColumn": 18,
+          "startingLine": 16
+        }
+      }
+    ]
+  },
+  "version": 1
+}

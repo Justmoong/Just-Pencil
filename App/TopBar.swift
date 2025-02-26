@@ -12,6 +12,7 @@ struct TopBarView: View {
     @Binding var canvasView: PKCanvasView
     @State var showShareSheet = false
     @State var snapshotImage: UIImage
+    private let toolPicker = PKToolPicker()
     
     var body: some View {
         
@@ -19,15 +20,17 @@ struct TopBarView: View {
         HStack {
             Spacer()
             Button(action: {
+                toolPicker.setVisible(false, forFirstResponder: canvasView)
                 self.snapshotImage = renderImage()
-                    self.showShareSheet = true
+                self.showShareSheet = true
             }) {
                 Image(systemName: "square.and.arrow.up")
             }
-            .sheet(isPresented: $showShareSheet) {
+            .sheet(isPresented: $showShareSheet, onDismiss: {
+                toolPicker.setVisible(true, forFirstResponder: canvasView)
+            }) {
                 let image = renderImage()
                     ShareSheet(items: [image])
-                
             }
         }
         .padding()

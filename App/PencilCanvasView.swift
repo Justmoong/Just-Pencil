@@ -13,10 +13,10 @@ struct PencilCanvasView: UIViewRepresentable {
             } else {
                 canvasView.allowsFingerDrawing = false    // iOS 13에서는 이 속성 사용
             }
-            if let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene {
+            if UIApplication.shared.connectedScenes.first is UIWindowScene {
                 toolPicker.setVisible(true, forFirstResponder: canvasView)
-                toolPicker.addObserver(canvasView)         // canvasView가 그리기 이벤트를 받도록 옵저버 추가 [oai_citation_attribution:13‡chance-lab.tistory.com](https://chance-lab.tistory.com/2#:~:text=canvas)
-                canvasView.becomeFirstResponder()          // 첫 응답자로 설정 (툴Picker 활성화) [oai_citation_attribution:14‡chance-lab.tistory.com](https://chance-lab.tistory.com/2#:~:text=toolPicker)
+                toolPicker.addObserver(canvasView)
+                canvasView.becomeFirstResponder()
             }
             return canvasView
         }

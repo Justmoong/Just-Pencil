@@ -9,36 +9,16 @@ import SwiftUI
 import PencilKit
 
 struct ContentView: View {
+    // PencilKit 캔버스와 툴피커 객체 생성
+    @State private var canvasView = PKCanvasView()
+    private let toolPicker = PKToolPicker()
     
     var body: some View {
-
-        HStack() {
-            PencilCanvasContentView()
+        VStack{
+            TopBarView(canvasView: $canvasView, snapshotImage: UIImage())
+            PencilCanvasView(canvasView: $canvasView, toolPicker: toolPicker)
+            BottomBarView(canvasView: $canvasView)
         }
-        .toolbar {
-            ToolbarItem(placement: .bottomBar) {
-                HStack {
-                    Button(action: {
-                        print("Undo")
-                    }) {
-                        Image(systemName: "arrow.uturn.backward")
-                    }
-                    Button(action: {
-                        print("Redo")
-                    }) {
-                        Image(systemName: "arrow.uturn.forward")
-                    }
-                    Spacer()
-                    Button(action: {
-                        print("Clear")
-                    }) {
-                        Image(systemName: "trash")
-                    }
-                }
-                .padding()
-            }
-        }
-        .padding()
     }
 }
 

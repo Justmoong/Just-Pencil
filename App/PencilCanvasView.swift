@@ -14,7 +14,7 @@ struct PencilCanvasView: UIViewRepresentable {
                 canvasView.allowsFingerDrawing = false    // iOS 13에서는 이 속성 사용
             }
             if UIApplication.shared.connectedScenes.first is UIWindowScene {
-                toolPicker.setVisible(true, forFirstResponder: canvasView)
+//                toolPicker.setVisible(true, forFirstResponder: canvasView)
                 toolPicker.addObserver(canvasView)
                 canvasView.becomeFirstResponder()
             }

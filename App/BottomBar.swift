@@ -18,6 +18,8 @@ struct BottomBarView: View {
 
             }) {
                 Image(systemName: "trash")
+                    .imageScale(.large)
+
             }
             Spacer()
 

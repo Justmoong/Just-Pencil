@@ -17,7 +17,7 @@ struct TopBarView: View {
     var body: some View {
         
         
-        HStack {
+        HStack (spacing: 16) {
             Button(action: {
                 showingSettings.toggle()
             }) {
@@ -25,6 +25,12 @@ struct TopBarView: View {
                     .imageScale(.large)
             }
             Spacer()
+            Button(action: {
+                
+            }) {
+                Image(systemName: "plus")
+                    .imageScale(.large)
+            }
             Button(action: {
                 self.snapshotImage = renderImage()
                 self.showShareSheet = true

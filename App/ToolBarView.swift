@@ -21,7 +21,7 @@ struct ToolBarView: View {
     let isInkingTool: (ToolType) -> Bool  // 🔹 @Binding 제거하여 일반 클로저로 변경
     
     var body: some View {
-        HStack(alignment: .center) {
+        HStack {
             ForEach(allTools, id: \.self) { tool in
                 if selectedToolsSet.contains(tool) {
                     Button(action: {

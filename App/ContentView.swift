@@ -22,9 +22,9 @@ struct ContentView: View {
         "pencil,pen,marker,eraser,lasso"  // 기본값: 모든 도구 표시
     
     /// selectedToolsString을 Set<ToolType>으로 변환한 computed property
-    @State private var selectedToolsSet: Set<ToolType> = [.pencil, .pen, .marker, .eraser, .lasso]
+    @State private var selectedToolsSet: Set<ToolType> = [.pencil, .pen, .marker, .eraser]
     
-    @State private var allTools: [ToolType] = [.pencil, .pen, .marker, .eraser, .lasso]
+    @State private var allTools: [ToolType] = [.pencil, .pen, .marker, .eraser]
     
     var body: some View {
         VStack (spacing: 0) {

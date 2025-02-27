@@ -44,7 +44,7 @@ struct ToolBarView: View {
                 Image(systemName: "scribble.variable")
                 Slider(
                     value: $brushWidth,
-                    in: 0.1...20,
+                    in: 1...50,
                     onEditingChanged: { _ in
                         if isInkingTool(selectedTool) {  // 🔹 클로저 호출
                             applyTool(selectedTool)

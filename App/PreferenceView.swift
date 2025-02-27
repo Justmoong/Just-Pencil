@@ -9,7 +9,7 @@ import Foundation
 import SwiftUI
 import PencilKit
 
-struct ToolSelectionView: View {
+struct PreferenceView: View {
     @Binding var selectedToolsString: String  // AppStorage로부터 바인딩된 선택 도구 문자열
     
     // PencilKit의 모든 도구 (순서는 ToolType 정의 순서를 따름)

@@ -43,7 +43,7 @@ struct ContentView: View {
         }
         .sheet(isPresented: $showingSettings) {
                     // 설정 시트: 사용 가능한 도구 목록을 Toggle로 선택
-                    ToolSelectionView(selectedToolsString: $selectedToolsString)
+                    PreferenceView(selectedToolsString: $selectedToolsString)
                 }
     }
     

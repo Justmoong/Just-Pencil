@@ -18,7 +18,7 @@ enum ToolType: String, CaseIterable {
     
     /// ToolType에 대응하는 PencilKit의 PKTool 객체 생성
     func createTool(color: UIColor, width: CGFloat, opacity: CGFloat) -> PKTool {
-        let validOpacity = max(0.1, min(CGFloat(opacity), 1.0))  // 범위 제한
+        let validOpacity = max(0.01, min(CGFloat(opacity), 1.0))  // 범위 제한
         let validWidth = max(1.0, min(CGFloat(width), 50.0))
 
         switch self {
@@ -29,7 +29,7 @@ enum ToolType: String, CaseIterable {
         case .marker:
             return PKInkingTool(.marker, color: color.withAlphaComponent(validOpacity), width: validWidth)
         case .eraser:
-            return PKEraserTool(.vector)
+            return PKInkingTool(.pen, color: color.withAlphaComponent(validOpacity), width: validWidth)
         case .lasso:
             return PKLassoTool()
         }

@@ -14,7 +14,7 @@ struct ContentView: View {
     private let toolPicker = PKToolPicker()// 그림을 그릴 PKCanvasView 인스턴스
     @State private var selectedTool: ToolType = .pencil             // 현재 선택된 도구 (기본: 연필)
     @State private var brushWidth: CGFloat = 1.0                    // 브러시 두께 (1~50)
-    @State private var brushOpacity: CGFloat = 0.5           // 브러시 불투명도 (0.01~1.0)
+    @State private var brushOpacity: CGFloat = 0.8          // 브러시 불투명도 (0.01~1.0)
     @State private var showingSettings: Bool = false                // 설정 시트 표시 여부
     
     // 사용자가 선택하여 표시할 도구들 (쉼표로 이어진 문자열 형태로 UserDefaults에 저장)
@@ -49,16 +49,21 @@ struct ContentView: View {
     
     /// 현재 선택된 도구가 잉크형 도구(펜, 연필, 형광펜)인지 검사
      private func isInkingTool(_ tool: ToolType) -> Bool {
-         return tool == .pencil || tool == .pen || tool == .marker
+         return tool == .pencil || tool == .pen || tool == .marker || tool == .eraser
      }
      
-     /// PencilKit 캔버스에 지정한 ToolType을 적용하는 함수
-     private func applyTool(_ tool: ToolType) {
-         // 잉크 도구의 경우 현재 슬라이더 값(색상: 검정)을 사용,
-         // 지우개/올가미의 경우 너비/불투명도는 의미 없으므로 해당 도구 생성
-         let newTool = tool.createTool(color: .black, width: brushWidth, opacity: brushOpacity)
-         canvasView.tool = newTool
-     }
+    private func applyTool(_ tool: ToolType) {
+        let newTool: PKTool
+
+        switch tool {
+        case .eraser:
+            newTool = tool.createTool(color: .white, width: brushWidth, opacity: brushOpacity)
+        default:
+            newTool = tool.createTool(color: .black, width: brushWidth, opacity: brushOpacity)
+        }
+
+        canvasView.tool = newTool
+    }
 }
 
 #Preview {

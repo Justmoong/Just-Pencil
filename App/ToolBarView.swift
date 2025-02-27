@@ -59,7 +59,6 @@ struct ToolBarView: View {
                 Slider(
                     value: $brushOpacity,
                     in: 0.01...1.0,
-                    step: 0.01,
                     onEditingChanged: { _ in
                         if isInkingTool(selectedTool) {  // 🔹 클로저 호출
                             applyTool(selectedTool)

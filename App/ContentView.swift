@@ -14,7 +14,7 @@ struct ContentView: View {
     private let toolPicker = PKToolPicker()// 그림을 그릴 PKCanvasView 인스턴스
     @State private var selectedTool: ToolType = .pencil             // 현재 선택된 도구 (기본: 연필)
     @State private var brushWidth: CGFloat = 1.0                    // 브러시 두께 (1~50)
-    @State private var brushOpacity: CGFloat = 0.6          // 브러시 불투명도 (0.01~1.0)
+    @State private var brushOpacity: CGFloat = 0.75          // 브러시 불투명도 (0.01~1.0)
     @State private var showingSettings: Bool = false                // 설정 시트 표시 여부
     
     // 사용자가 선택하여 표시할 도구들 (쉼표로 이어진 문자열 형태로 UserDefaults에 저장)
@@ -57,7 +57,7 @@ struct ContentView: View {
 
         switch tool {
         case .eraser:
-            newTool = tool.createTool(color: .white, width: brushWidth, opacity: brushOpacity)
+            newTool = PKEraserTool(.fixedWidthBitmap, width: brushWidth)
         default:
             newTool = tool.createTool(color: .black, width: brushWidth, opacity: brushOpacity)
         }

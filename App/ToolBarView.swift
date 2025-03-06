@@ -29,6 +29,7 @@ struct ToolBarView: View {
                         applyTool(tool)  // 🔹 함수 실행
                     }) {
                         Image(systemName: tool.displaySymbol)
+                            .imageScale(.large)
                             .padding(8)
                             .background(selectedTool == tool ? Color.gray.opacity(0.2) : Color.clear)
                             .cornerRadius(8)

@@ -26,7 +26,7 @@ enum ToolType: String, CaseIterable {
         case .pen:
             return PKInkingTool(.pen, color: color.withAlphaComponent(validOpacity), width: validWidth)
         case .marker:
-            return PKInkingTool(.marker, color: color.withAlphaComponent(validOpacity), width: validWidth)
+            return PKEraserTool(.fixedWidthBitmap, width: validWidth)
         case .eraser:
             return PKInkingTool(.pen, color: color.withAlphaComponent(validOpacity), width: validWidth)
         }

@@ -16,7 +16,7 @@ struct PencilCanvasView: UIViewRepresentable {
             if UIApplication.shared.connectedScenes.first is UIWindowScene {
 //                toolPicker.setVisible(true, forFirstResponder: canvasView)
                 toolPicker.addObserver(canvasView)
-                canvasView.becomeFirstResponder()
+                canvasView.backgroundColor = .clear
             }
             return canvasView
         }

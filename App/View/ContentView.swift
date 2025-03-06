@@ -45,9 +45,8 @@ struct ContentView: View {
                 isInkingTool: isInkingTool  // 🔹 일반 클로저로 전달
             )
             ZStack {
-                PencilCanvasView(canvasView: $canvasView, toolPicker: toolPicker)
                 CanvasImageView(showSourceDialog: $showSourceDialog, showImagePicker: $showImagePicker, selectedImage: $selectedImage, canvasImages: $canvasImages)
-                
+                PencilCanvasView(canvasView: $canvasView, toolPicker: toolPicker)
             }
             BottomBarView(canvasView: $canvasView)
         }

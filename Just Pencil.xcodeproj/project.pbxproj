@@ -27,6 +27,7 @@
 		F91281D62D6B747200662036 /* Just Pencil.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Just Pencil.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		F91281E62D6B747300662036 /* Just PencilTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Just PencilTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		F91281F02D6B747300662036 /* Just PencilUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Just PencilUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		F99B09582D79BF5A0011F82B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
@@ -75,6 +76,7 @@
 		F91281CD2D6B747200662036 = {
 			isa = PBXGroup;
 			children = (
+				F99B09582D79BF5A0011F82B /* Info.plist */,
 				F91281D82D6B747200662036 /* App */,
 				F91281E92D6B747300662036 /* Just PencilTests */,
 				F91281F32D6B747300662036 /* Just PencilUITests */,

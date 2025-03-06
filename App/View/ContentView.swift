@@ -26,9 +26,15 @@ struct ContentView: View {
     
     @State private var allTools: [ToolType] = [.pencil, .pen, .marker, .eraser]
     
+    @State var showSourceDialog: Bool = false
+    @State var showImagePicker: Bool = false
+    @State var selectedImage: UIImage?
+    @State var canvasImages: [CanvasImage]  = [CanvasImage(image: UIImage())]
+    @State var pickerSource: UIImagePickerController.SourceType = .photoLibrary
+    
     var body: some View {
         VStack (spacing: 0) {
-            TopBarView(canvasView: $canvasView, snapshotImage: UIImage(), showingSettings: $showingSettings)
+            TopBarView(canvasView: $canvasView, snapshotImage: UIImage(), showingSettings: $showingSettings, showSourceDialog: $showSourceDialog, showImagePicker: $showImagePicker, selectedImage: $selectedImage, pickerSource: $pickerSource, canvasImages: $canvasImages)
             ToolBarView(
                 allTools: $allTools,
                 selectedToolsSet: $selectedToolsSet,
@@ -38,7 +44,11 @@ struct ContentView: View {
                 brushOpacity: $brushOpacity,
                 isInkingTool: isInkingTool  // 🔹 일반 클로저로 전달
             )
-            PencilCanvasView(canvasView: $canvasView, toolPicker: toolPicker)
+            ZStack {
+                PencilCanvasView(canvasView: $canvasView, toolPicker: toolPicker)
+                CanvasImageView(showSourceDialog: $showSourceDialog, showImagePicker: $showImagePicker, selectedImage: $selectedImage, canvasImages: $canvasImages)
+                
+            }
             BottomBarView(canvasView: $canvasView)
         }
         .sheet(isPresented: $showingSettings) {
@@ -67,5 +77,5 @@ struct ContentView: View {
 }
 
 #Preview {
-    ContentView()
+    ContentView(canvasImages: [CanvasImage(image: UIImage(named: "image1")!), CanvasImage(image: UIImage(named: "image2")!)])
 }

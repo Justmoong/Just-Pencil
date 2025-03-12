@@ -22,9 +22,9 @@ struct ContentView: View {
         "pencil,pen,marker,eraser,lasso"  // 기본값: 모든 도구 표시
     
     /// selectedToolsString을 Set<ToolType>으로 변환한 computed property
-    @State private var selectedToolsSet: Set<ToolType> = [.pencil, .pen, .marker, .eraser]
+    @State private var selectedToolsSet: Set<ToolType> = [.pencil, .pen, .eraser]
     
-    @State private var allTools: [ToolType] = [.pencil, .pen, .marker, .eraser]
+    @State private var allTools: [ToolType] = [.pencil, .pen, .eraser]
     
     @State var showSourceDialog: Bool = false
     @State var showImagePicker: Bool = false
@@ -58,7 +58,7 @@ struct ContentView: View {
     
     /// 현재 선택된 도구가 잉크형 도구(펜, 연필, 형광펜)인지 검사
      private func isInkingTool(_ tool: ToolType) -> Bool {
-         return tool == .pencil || tool == .pen || tool == .marker || tool == .eraser
+         return tool == .pencil || tool == .pen || tool == .eraser
      }
      
     private func applyTool(_ tool: ToolType) {
@@ -73,6 +73,8 @@ struct ContentView: View {
 
         canvasView.tool = newTool
     }
+    
+    
 }
 
 #Preview {

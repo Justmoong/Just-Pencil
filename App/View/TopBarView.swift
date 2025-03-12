@@ -77,6 +77,12 @@ struct TopBarView: View {
     }
     
     private func renderImage() -> UIImage {
-        return canvasView.drawing.image(from: canvasView.bounds, scale: UIScreen.main.scale)
+        guard let containerView = canvasView.superview?.superview else { return UIImage() }
+        let renderer = UIGraphicsImageRenderer(size: containerView.bounds.size)
+        return renderer.image { ctx in
+            containerView.drawHierarchy(in: CGRect(origin: .zero, size: containerView.bounds.size), afterScreenUpdates: true)
+        }
     }
+    
+
 }

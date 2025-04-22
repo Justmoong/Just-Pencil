@@ -15,6 +15,7 @@ struct ContentView: View {
     @State private var selectedTool: ToolType = .pencil             // 현재 선택된 도구 (기본: 연필)
     @State private var brushWidth: CGFloat = 1.0                    // 브러시 두께 (1~50)
     @State private var brushOpacity: CGFloat = 0.75          // 브러시 불투명도 (0.01~1.0)
+    @State private var selectedColor: Color = .black               // 선택된 색상 (기본: 검정색)
     @State private var showingSettings: Bool = false                // 설정 시트 표시 여부
     
     // 사용자가 선택하여 표시할 도구들 (쉼표로 이어진 문자열 형태로 UserDefaults에 저장)
@@ -22,9 +23,9 @@ struct ContentView: View {
         "pencil,pen,marker,eraser,lasso"  // 기본값: 모든 도구 표시
     
     /// selectedToolsString을 Set<ToolType>으로 변환한 computed property
-    @State private var selectedToolsSet: Set<ToolType> = [.pencil, .pen, .eraser]
+    @State private var selectedToolsSet: Set<ToolType> = [.pencil, .pen, .eraser, .selection]
     
-    @State private var allTools: [ToolType] = [.pencil, .pen, .eraser]
+    @State private var allTools: [ToolType] = [.pencil, .pen, .eraser, .selection]
     
     @State var showSourceDialog: Bool = false
     @State var showImagePicker: Bool = false
@@ -35,6 +36,7 @@ struct ContentView: View {
     var body: some View {
         VStack (spacing: 0) {
             TopBarView(canvasView: $canvasView, snapshotImage: UIImage(), showingSettings: $showingSettings, showSourceDialog: $showSourceDialog, showImagePicker: $showImagePicker, selectedImage: $selectedImage, pickerSource: $pickerSource, canvasImages: $canvasImages)
+            Divider()
             ToolBarView(
                 allTools: $allTools,
                 selectedToolsSet: $selectedToolsSet,
@@ -42,12 +44,15 @@ struct ContentView: View {
                 applyTool: applyTool,  // 🔹 일반 클로저로 전달
                 brushWidth: $brushWidth,
                 brushOpacity: $brushOpacity,
+                selectedColor: $selectedColor,
                 isInkingTool: isInkingTool  // 🔹 일반 클로저로 전달
             )
+            Divider()
             ZStack {
                 CanvasImageView(showSourceDialog: $showSourceDialog, showImagePicker: $showImagePicker, selectedImage: $selectedImage, canvasImages: $canvasImages)
                 PencilCanvasView(canvasView: $canvasView, toolPicker: toolPicker)
             }
+            Divider()
             BottomBarView(canvasView: $canvasView)
         }
         .sheet(isPresented: $showingSettings) {
@@ -67,6 +72,8 @@ struct ContentView: View {
         switch tool {
         case .eraser:
             newTool = PKEraserTool(.fixedWidthBitmap, width: brushWidth)
+        case .selection:
+            newTool = PKInkingTool(.pen, color: .clear, width: 0)
         default:
             newTool = tool.createTool(color: .black, width: brushWidth, opacity: brushOpacity)
         }

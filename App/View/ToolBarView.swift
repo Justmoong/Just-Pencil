@@ -17,6 +17,8 @@ struct ToolBarView: View {
     let applyTool: (ToolType) -> Void  // 🔹 @Binding 제거하여 일반 클로저로 변경
     @Binding var brushWidth: CGFloat  // 브러시 두께
     @Binding var brushOpacity: CGFloat  // 브러시 불투명도
+    @Binding var selectedColor: Color  // 선택된 색상
+    
 
     let isInkingTool: (ToolType) -> Bool  // 🔹 @Binding 제거하여 일반 클로저로 변경
     
@@ -67,6 +69,9 @@ struct ToolBarView: View {
                     }
                 )
             }
+            ColorPicker("", selection: $selectedColor)
+                .labelsHidden()
+                .padding(.horizontal, 8)
 
         }
         .padding(.horizontal, 16)

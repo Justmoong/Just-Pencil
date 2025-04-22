@@ -55,6 +55,9 @@ struct ContentView: View {
             Divider()
             BottomBarView(canvasView: $canvasView)
         }
+        .onChange(of: selectedColor) { _ in
+            applyTool(selectedTool)
+        }
         .sheet(isPresented: $showingSettings) {
                     // 설정 시트: 사용 가능한 도구 목록을 Toggle로 선택
                     PreferenceView(selectedToolsString: $selectedToolsString)
@@ -75,7 +78,7 @@ struct ContentView: View {
         case .selection:
             newTool = PKInkingTool(.pen, color: .clear, width: 0)
         default:
-            newTool = tool.createTool(color: .black, width: brushWidth, opacity: brushOpacity)
+            newTool = tool.createTool(color: UIColor(selectedColor), width: brushWidth, opacity: brushOpacity)
         }
 
         canvasView.tool = newTool

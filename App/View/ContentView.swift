@@ -18,14 +18,10 @@ struct ContentView: View {
     @State private var selectedColor: Color = .black               // 선택된 색상 (기본: 검정색)
     @State private var showingSettings: Bool = false                // 설정 시트 표시 여부
     
-    // 사용자가 선택하여 표시할 도구들 (쉼표로 이어진 문자열 형태로 UserDefaults에 저장)
-    @AppStorage("selectedTools") private var selectedToolsString: String =
-        "pencil,pen,marker,eraser,lasso"  // 기본값: 모든 도구 표시
-    
     /// selectedToolsString을 Set<ToolType>으로 변환한 computed property
-    @State private var selectedToolsSet: Set<ToolType> = [.pencil, .pen, .eraser, .selection]
+    @State private var selectedToolsSet: Set<ToolType> = [.pencil, .pen, .eraser]
     
-    @State private var allTools: [ToolType] = [.pencil, .pen, .eraser, .selection]
+    @State private var allTools: [ToolType] = [.pencil, .pen, .eraser]
     
     @State var showSourceDialog: Bool = false
     @State var showImagePicker: Bool = false
@@ -59,10 +55,10 @@ struct ContentView: View {
         .onChange(of: selectedColor) { _ in
             applyTool(selectedTool)
         }
-        .sheet(isPresented: $showingSettings) {
-                    // 설정 시트: 사용 가능한 도구 목록을 Toggle로 선택
-                    PreferenceView(selectedToolsString: $selectedToolsString)
-                }
+//        .sheet(isPresented: $showingSettings) {
+//                    // 설정 시트: 사용 가능한 도구 목록을 Toggle로 선택
+//                    PreferenceView(selectedToolsString: $selectedToolsString)
+//                }
     }
     
     /// 현재 선택된 도구가 잉크형 도구(펜, 연필, 형광펜)인지 검사
@@ -76,8 +72,8 @@ struct ContentView: View {
         switch tool {
         case .eraser:
             newTool = PKEraserTool(.fixedWidthBitmap, width: brushWidth)
-        case .selection:
-            newTool = PKInkingTool(.pen, color: .clear, width: 0)
+//        case .selection:
+//            newTool = PKInkingTool(.pen, color: .clear, width: 0)
         default:
             newTool = tool.createTool(color: UIColor(selectedColor), width: brushWidth, opacity: brushOpacity)
         }

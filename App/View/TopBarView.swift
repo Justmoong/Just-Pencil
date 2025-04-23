@@ -18,6 +18,7 @@ struct TopBarView: View {
     @Binding var selectedImage: UIImage?
     @Binding var pickerSource: UIImagePickerController.SourceType
     @Binding var canvasImages: [CanvasImage]
+    @Binding var isCanvasPhotoEmpty: Bool
     
     var body: some View {
         
@@ -35,12 +36,12 @@ struct TopBarView: View {
             }) {
                 Image(systemName: "plus")
                     .imageScale(.large)
-                    .confirmationDialog("이미지 소스 선택", isPresented: $showSourceDialog) {
-                                Button("사진 촬영") {
+                    .confirmationDialog("Select Source Image", isPresented: $showSourceDialog) {
+                                Button("Take Photo") {
                                     pickerSource = .camera
                                     showImagePicker = true
                                 }
-                                Button("사진 앨범") {
+                                Button("Select Photo") {
                                     pickerSource = .photoLibrary
                                     showImagePicker = true
                                 }
@@ -52,11 +53,14 @@ struct TopBarView: View {
                                     // 새 CanvasImage 객체를 만들어 중앙에 추가
                                     canvasImages.append(CanvasImage(image: img))
                                     selectedImage = nil
+                                    isCanvasPhotoEmpty = false
                                 }
                             }) {
                                 PhotoSelector(image: $selectedImage, sourceType: pickerSource)
                             }
             }
+            .disabled(!isCanvasPhotoEmpty)
+            
             Button(action: {
                 self.snapshotImage = renderImage()
                 self.showShareSheet = true
@@ -77,10 +81,23 @@ struct TopBarView: View {
     }
     
     private func renderImage() -> UIImage {
-        guard let containerView = canvasView.superview?.superview else { return UIImage() }
-        let renderer = UIGraphicsImageRenderer(size: containerView.bounds.size)
+        guard let canvasSuperview = canvasView.superview?.superview else {
+            return UIImage()
+        }
+
+        // subviews[0] = CanvasImageView, subviews[1] = PencilCanvasView
+        let canvasLayerView = canvasSuperview.subviews[19]
+        let pencilLayerView = canvasSuperview.subviews[20]
+        let size = canvasSuperview.bounds.size
+
+        let renderer = UIGraphicsImageRenderer(size: size)
+
         return renderer.image { ctx in
-            containerView.drawHierarchy(in: CGRect(origin: .zero, size: containerView.bounds.size), afterScreenUpdates: true)
+            UIColor.white.setFill()
+            ctx.fill(CGRect(origin: .zero, size: size))
+
+            canvasLayerView.drawHierarchy(in: canvasLayerView.bounds, afterScreenUpdates: true)
+            pencilLayerView.drawHierarchy(in: pencilLayerView.bounds, afterScreenUpdates: true)
         }
     }
     

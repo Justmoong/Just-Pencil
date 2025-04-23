@@ -1,10 +1,3 @@
-//
-//  ToolType.swift
-//  Just Pencil
-//
-//  Created by ymy on 2/27/25.
-//
-
 import SwiftUI
 import PencilKit
 

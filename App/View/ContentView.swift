@@ -32,10 +32,11 @@ struct ContentView: View {
     @State var selectedImage: UIImage?
     @State var canvasImages: [CanvasImage]  = [CanvasImage(image: UIImage())]
     @State var pickerSource: UIImagePickerController.SourceType = .photoLibrary
+    @State var isCanvasPhotoEmpty: Bool = true
     
     var body: some View {
         VStack (spacing: 0) {
-            TopBarView(canvasView: $canvasView, snapshotImage: UIImage(), showingSettings: $showingSettings, showSourceDialog: $showSourceDialog, showImagePicker: $showImagePicker, selectedImage: $selectedImage, pickerSource: $pickerSource, canvasImages: $canvasImages)
+            TopBarView(canvasView: $canvasView, snapshotImage: UIImage(), showingSettings: $showingSettings, showSourceDialog: $showSourceDialog, showImagePicker: $showImagePicker, selectedImage: $selectedImage, pickerSource: $pickerSource, canvasImages: $canvasImages, isCanvasPhotoEmpty: $isCanvasPhotoEmpty)
             Divider()
             ToolBarView(
                 allTools: $allTools,
